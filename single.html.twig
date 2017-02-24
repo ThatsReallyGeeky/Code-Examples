@@ -1,0 +1,49 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="wrapper kitchen content clearfix"><!-- start wrapper div -->
+
+    <div class="container"><!-- start container div -->
+
+        <h1>{{ kitchen.name }}</h1>
+
+        <div class="kitchen-container clearfix">
+
+            <p>dddd</p>
+
+            <a class="btn blue">Start Ordering</a>
+
+        </div>
+
+    </div><!-- end container div -->
+
+</div><!-- end wrapper div -->
+
+<div class="wrapper kitchen-finishes clearfix" ng-controller="KitchenFinishController"><!-- start wrapper div -->
+
+    <div class="container finish-preview" style="background:url(/images/static/kitchen-cgi-tmp.jpg) no-repeat;"><!-- start container.finish-preview div -->
+
+
+    </div><!-- end container.finish-preview div -->
+
+    <div class="container finish-swatches clearfix"><!-- start container.finish-swatches div -->
+
+        {% for swatch in kitchenFinishes if swatch.kitchenFinish.image %}
+
+            <a class="swatch" ng-click="changePreview('{{ swatch.kitchenImage }}')"><img src="{{ swatch.kitchenFinish.image.filepath }}" alt="{{ swatch.kitchenFinish.name }}"></a>
+
+        {% endfor %}
+
+    </div><!-- end container.finish-swatches div -->
+
+</div><!-- end wrapper div -->
+
+{{ include('Frontend:Kitchen/Partial:product-spec.html.twig') }}
+{{ include('Frontend:Kitchen/Partial:product-reviews.html.twig') }}
+{{ include('Frontend:Kitchen/Partial:product-quick-price.html.twig') }}
+{{ include('Frontend:Kitchen/Partial:product-colour-match-units.html.twig') }}
+{{ include('Frontend:Kitchen/Partial:product-features.html.twig') }}
+{{ include('Frontend:Kitchen/Partial:product-customers-viewed.html.twig') }}
+{{ include('Frontend:Kitchen/Partial:product-bespoke-colours.html.twig') }}
+
+{% endblock %}

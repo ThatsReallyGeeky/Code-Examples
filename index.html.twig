@@ -1,0 +1,36 @@
+{% extends '::base-content.html.twig' %}
+
+{% block content %}
+<div class="wrapper content clearfix"><!-- start wrapper.content div -->
+
+    <div class="container"><!-- start container div -->
+
+        <a href="{{ path('content_add_kitchen') }}">Add Range</a>
+
+        <table>
+            <tr>
+                <th>Range Name</th>
+                <th>Path</th>
+                <th>Active</th>
+                <th>Created</th>
+                <th>Last Updated</th>
+                <th>Actions</th>
+            </tr>
+            {% for kitchen in kitchens %}
+            <tr>
+                <td>{{ kitchen.name }}</td>
+                <td><a href="{{ path('kitchens', {'slug':kitchen.slug}) }}" target="_blank">/kitchens/{{ kitchen.slug }}</a></td>
+                <td>{{ kitchen.active ? 'Yes':'No' }}</td>
+                <td>{{ kitchen.createdAt | date('d/m/Y H:i:s') }}</td>
+                <td>{{ kitchen.updatedAt | date('d/m/Y H:i:s') }}</td>
+                <td>
+                    <a href="{{ path('content_edit_kitchen', {'kitchenId':kitchen.id}) }}">Edit</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+
+    </div><!-- end container div -->
+
+</div><!-- end wrapper.content div -->
+{% endblock %}

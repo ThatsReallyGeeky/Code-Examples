@@ -1,0 +1,90 @@
+{% extends '::base.html.twig' %}
+
+{% block content %}
+<div class="wrapper banner clearfix"><!-- start wrapper.banner div -->
+
+    <div class="container"><!-- start container div -->
+
+        <div class="standard-overview kitchens clearfix">
+
+            <div class="left-column"><!-- start left-column div -->
+
+                <h1>{{ currentStyle.name | default('All') }} Kitchens</h1>
+                <div class="content clearfix">
+
+                    {{ (currentStyle.shortDescription | default('')) | raw }}
+                    <p><a class="btn blue" href="#">See how we are different</a></p>
+
+                </div>
+
+            </div><!-- end left-column div -->
+
+            <div class="right-column"><!-- start right-column div -->
+
+                <div class="content">
+
+                    <div style="width:580px; height:358px; background:#333; color:#fff; text-align:center; line-height:358px;">Image Here</div>
+
+                </div>
+
+            </div><!-- end right-column div -->
+
+        </div>
+
+    </div><!-- end container div -->
+
+</div><!-- end wrapper.banner div -->
+
+<div class="wrapper content clearfix" ng-controller="KitchenPageController"><!-- start wrapper.content div -->
+
+    <div class="container clearfix"><!-- start container div -->
+
+        <div class="layout standard clearfix"><!-- start kitchens-layout div -->
+
+            <div class="left-column"><!-- start left-column div -->
+
+                <div class="menu-filter clearfix"><!-- start filter-bar div -->
+
+                    <a class="clear" ng-click="filterReset('{{ path('ajax_filter_kitchen_grid', {'slug':app.request.attributes.get('slug')}) }}')"></a>
+                    <a class="minimise"></a>
+
+                </div><!-- end filter-bar div -->
+
+                <div class="menus clearfix"><!-- start menus div -->
+
+                    {{ knp_menu_render('kitchenStyle', {'template':'Shared:Menu:menu.html.twig'}) }}
+                    {{ knp_menu_render('kitchenFinish', {'template':'Shared:Menu:menu.html.twig'}) }}
+                    {{ knp_menu_render('kitchenMaterial', {'template':'Shared:Menu:menu.html.twig'}) }}
+                    {{ knp_menu_render('kitchenFinishes', {'template':'Shared:Menu:kitchen-finish-menu.html.twig'}) }}
+                    {{ knp_menu_render('popularKitchens', {'template':'Shared:Menu:menu.html.twig'}) }}
+
+                </div><!-- end menus div -->
+
+                <div class="menu-filter clearfix"><!-- start filter-bar div -->
+
+                    <a class="clear" ng-click="filterReset('{{ path('ajax_filter_kitchen_grid', {'slug':app.request.attributes.get('slug')}) }}')"></a>
+                    <a class="minimise"></a>
+                    <a class="top" ng-click="window.top();"></a>
+
+                </div><!-- end filter-bar div -->
+
+            </div><!-- end left-column div -->
+
+            <div class="right-column" ng-bind-html="kitchens"><!-- start right-column div -->
+
+                <div ng-init="filterGrid('{{ filterUrl }}')"></div>
+
+            </div><!-- end right-column div -->
+
+        </div><!-- end kitchens-layout div -->
+
+    </div><!-- end container div -->
+
+</div><!-- end wrapper.content div -->
+
+{#{ render(controller('Frontend:CmsBlock:cmsBlocksPartial', {'path':app.request.requestUri})) }#}
+{#{ render(controller('Frontend:Kitchen:externalReviewsPartial')) }#}
+{#{ render(controller('Frontend:Kitchen:reviewsPartial', {'style':currentStyle})) }#}
+{{ render(controller('Frontend:Kitchen:helpPartial')) }}
+
+{% endblock %}
